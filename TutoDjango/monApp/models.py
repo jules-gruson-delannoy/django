@@ -23,7 +23,7 @@ class Rayon(models.Model):
     idRayon = models.AutoField(primary_key=True)
     nomRayon = models.CharField(max_length=100)
     # Relation CIF : chaque rayon peut contenir plusieurs produits (0,N côté produit → 0,1 côté rayon)
-    produits = models.ManyToManyField('Produit', related_name="rayons", blank=True)
+    produits = models.ManyToManyField(Produit, related_name="rayons", blank=True)
     
     def __str__(self):
         return self.nomRayon
