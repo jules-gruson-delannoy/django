@@ -7,4 +7,7 @@ urlpatterns = [
     path("home/<param>", views.home2, name="home3"),
     path("contact/", views.contactUs, name="contactUs"),
     path("info/", views.aboutUs, name="aboutUs"),
+    path("produits/", views.ListProduits, name="ListProduits"),
+    path("categories/", views.ListCategories, name="ListCategories"),
+    path("statuts/", views.ListStatuts, name="ListStatuts"),
 ]

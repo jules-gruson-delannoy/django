@@ -7,24 +7,28 @@ class Categorie(models.Model):
     def __str__(self):
         return self.nomCat
 
-class Produit(models.Model):
-    refProd = models.AutoField(primary_key=True)
-    intituleProd = models.CharField(max_length=200)
-    prixUnitaireProd = models.DecimalField(max_digits=10, decimal_places=2)
-    dateFabricationProd = models.DateField(auto_now_add=True)
-    # Relation CIF : chaque produit appartient à 1 catégorie (0,N côté catégorie → 1,1 côté produit)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, 
-                                  related_name="produits",null=True, blank=True)
-    
+class Statut(models.Model):
+    idStatus = models.AutoField(primary_key=True)
+    libelleStatus = models.CharField(max_length=100)
+
     def __str__(self):
-        return self.intituleProd
+        return self.libelle
 
 class Rayon(models.Model):
     idRayon = models.AutoField(primary_key=True)
     nomRayon = models.CharField(max_length=100)
-    # Relation CIF : chaque rayon peut contenir plusieurs produits (0,N côté produit → 0,1 côté rayon)
-    produits = models.ManyToManyField(Produit, related_name="rayons", blank=True)
-    
+    produits = models.ManyToManyField('Produit', related_name='rayons')
+
     def __str__(self):
         return self.nomRayon
-    
+
+class Produit(models.Model):
+    refProd = models.AutoField(primary_key=True)
+    intituleProd = models.CharField(max_length=200)
+    prixUnitaireProd = models.DecimalField(max_digits=10, decimal_places=2)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name="produits", null=True, blank=True)
+    dateFabrication = models.DateField(null=True, blank=True)
+    statut = models.ForeignKey(Statut, on_delete=models.SET_NULL, null=True, blank=True, related_name='produits')
+
+    def __str__(self):
+        return self.intituleProd
