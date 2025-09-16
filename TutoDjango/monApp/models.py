@@ -12,7 +12,7 @@ class Statut(models.Model):
     libelleStatus = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.libelle
+        return self.libelleStatus
 
 class Rayon(models.Model):
     idRayon = models.AutoField(primary_key=True)
@@ -32,3 +32,11 @@ class Produit(models.Model):
 
     def __str__(self):
         return self.intituleProd
+
+class Contenir(models.Model):
+    rayons = models.ForeignKey(Rayon, on_delete=models.CASCADE, null=False, blank=False, default=0)
+    produits = models.ForeignKey(Produit, on_delete=models.CASCADE, null=False, blank=False, default=0)
+    qte = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.rayons} : {self.produits}"
