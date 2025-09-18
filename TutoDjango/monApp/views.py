@@ -3,13 +3,16 @@ from django.http import HttpResponse
 from .models import Produit, Categorie, Statut
 
 def home(request):
-    return HttpResponse("<h1>Hello Django!</h1>")
+    string = request.GET['name']
+    return HttpResponse("Bonjour %s!" % string)
 
 def home2(request, param):
     if param == "":
+        print(dir(request))
         return HttpResponse("<h1>Hello Django!</h1>")
+    print(dir(request))
     return HttpResponse(f"<h1>Bonjour {param} !</h1>")
-
+ 
 def aboutUs(request):
     return HttpResponse("<h1>Qui Sommes Nous ?</h1><p>Nous sommes les goats</p>")
 

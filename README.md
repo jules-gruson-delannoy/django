@@ -2,6 +2,6 @@
 
 commande équivalente a "django-admin" = "python -m django"
 
-Je suis dans le TD 2 actuellement
+Je suis dans le TPD 2 actuellement
 
-Page 5 du TD 2
+Page 4 du TP 2
