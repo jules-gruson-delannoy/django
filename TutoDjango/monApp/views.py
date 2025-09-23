@@ -20,19 +20,8 @@ def contactUs(request):
     return HttpResponse("<h1>Nos contact</h1><p>Insta en vrai</p>")
 
 def ListProduits(request):
- prdts = Produit.objects.all()
- liste = "".join(f"<li>{p.intituleProd}</li>" for p in prdts)
- html = f"""
-    <html>
-        <body>
-            <h1>Liste des produits</h1>
-            <ul>
-                {liste}
-            </ul>
-        </body>
-    </html>
- """
- return HttpResponse(html)
+    prdts = Produit.objects.all()
+    return render(request, 'monApp/list_produits.html', {'prdts': prdts})
 
 def ListCategories(request):
  ctgrs = Categorie.objects.all()
