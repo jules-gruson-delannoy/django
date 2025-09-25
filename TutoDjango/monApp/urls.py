@@ -10,4 +10,5 @@ urlpatterns = [
     path("produits/", views.ListProduits, name="ListProduits"),
     path("categories/", views.ListCategories, name="ListCategories"),
     path("statuts/", views.ListStatuts, name="ListStatuts"),
+    path("rayons/", views.ListRayons, name="ListRayons"),
 ]

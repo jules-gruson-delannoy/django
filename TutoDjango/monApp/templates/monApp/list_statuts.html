@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Liste des statuts</title>
+</head>
+<body>
+    <h1>Statuts disponibles</h1>
+    <ul>
+        {% for st in stts %}
+            <li>{{ st.libelleStatus }}</li>
+        {% empty %}
+            <li>Aucun statut disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

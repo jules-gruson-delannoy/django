@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Liste des catégories</title>
+</head>
+<body>
+    <h1>Catégories disponibles</h1>
+    <ul>
+        {% for cat in ctgrs %}
+            <li>{{ cat.nomCat }}</li>
+        {% empty %}
+            <li>Aucune catégorie disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

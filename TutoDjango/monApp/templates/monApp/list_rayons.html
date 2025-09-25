@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Liste des rayons</title>
+</head>
+<body>
+    <h1>Rayons disponibles</h1>
+    <ul>
+        {% for rayon in rayons %}
+            <li>{{ rayon.nomRayon }}</li>
+        {% empty %}
+            <li>Aucun rayon disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
