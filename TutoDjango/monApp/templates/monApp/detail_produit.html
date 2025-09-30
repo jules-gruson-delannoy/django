@@ -1,0 +1,18 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<h1>{{ titremenu }}</h1>
+<div class="card">
+    <div class="card-body">
+        <h2>{{ prdt.intituleProd }}</h2>
+        <ul class="list-unstyled">
+            <li><strong>Référence produit :</strong> {{ prdt.refProd }}</li>
+            <li><strong>Prix unitaire HT :</strong> {{ prdt.prixUnitaireProd }} €</li>
+            <li><strong>Date de fabrication :</strong> {{ prdt.dateFabProd }}</li>
+            <li><strong>Catégorie :</strong> {{ prdt.categorie }}</li>
+            <li><strong>Statut :</strong> {{ prdt.statut }}</li>
+        </ul>
+        <a href="{% url 'lst_prdts' %}" class="btn btn-primary">Retour à la liste des produits</a>
+    </div>
+</div>
+{% endblock %}

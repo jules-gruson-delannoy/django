@@ -1,0 +1,22 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<h1>{{ titremenu }}</h1>
+<div class="card">
+    <div class="card-body">
+        <h2>{{ statut.libelleStatus }}</h2>
+        <p><strong>ID :</strong> {{ statut.idStatus }}</p>
+        
+        <h4>Produits avec ce statut :</h4>
+        <ul>
+            {% for produit in statut.produits.all %}
+            <li>{{ produit.intituleProd }} - {{ produit.prixUnitaireProd }} €</li>
+            {% empty %}
+            <li>Aucun produit avec ce statut</li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'lst_statuts' %}" class="btn btn-primary">Retour à la liste des statuts</a>
+    </div>
+</div>
+{% endblock %}

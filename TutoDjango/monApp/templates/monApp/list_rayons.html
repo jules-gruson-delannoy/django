@@ -1,27 +1,27 @@
 {% extends 'monApp/base.html' %}
 
-{% block menu %}
-<h1>Rayons disponibles</h1>
-{% endblock %}
-
 {% block contenu %}
-<ul>
-    {% for rayon in rayons %}
-        <li>{{ rayon.nomRayon }}</li>
-    {% empty %}
-        <li>Aucun rayon disponible.</li>
-    {% endfor %}
-</ul>
-
-<p>
-    J'ai 
-    {% if rayons|length < 5 %}
-        peu de 
-    {% elif rayons|length < 10 %}
-        quelques 
-    {% else %}
-        beaucoup de 
-    {% endif %}
-    rayons préférés.
-</p>
+<h1>{{ titremenu }}</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Nombre de produits</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rayon in rayons %}
+        <tr>
+            <td><a href="{% url 'dtl_rayon' rayon.idRayon %}">{{ rayon.idRayon }}</a></td>
+            <td>{{ rayon.nomRayon }}</td>
+            <td>{{ rayon.produits.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">Aucun rayon trouvé</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

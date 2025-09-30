@@ -1,27 +1,27 @@
 {% extends 'monApp/base.html' %}
 
-{% block menu %}
-<h1>Statuts disponibles</h1>
-{% endblock %}
-
 {% block contenu %}
-<ul>
-    {% for st in stts %}
-        <li>{{ st.libelleStatus }}</li>
-    {% empty %}
-        <li>Aucun statut disponible.</li>
-    {% endfor %}
-</ul>
-
-<p>
-    J'ai 
-    {% if stts|length < 5 %}
-        peu de 
-    {% elif stts|length < 10 %}
-        quelques 
-    {% else %}
-        beaucoup de 
-    {% endif %}
-    statuts préférés.
-</p>
+<h1>{{ titremenu }}</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Libellé</th>
+            <th>Nombre de produits</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for statut in statuts %}
+        <tr>
+            <td><a href="{% url 'dtl_statut' statut.idStatus %}">{{ statut.idStatus }}</a></td>
+            <td>{{ statut.libelleStatus }}</td>
+            <td>{{ statut.produits.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">Aucun statut trouvé</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<div class="align-center col-8 offset-2">
+    <p class="lead mb-3 ml-0">Se connecter</p>
+    
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    
+    <hr/>
+    <form method="POST" action="{% url 'login' %}" autocomplete="off">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label>Identifiant</label>
+            <input class="form-control" type="text" name="username" placeholder="Utilisateur" required>
+            <label>Mot de Passe</label>
+            <input class="form-control" type="password" name="password" placeholder="Mot de passe" required>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Se connecter</button>
+    </form>
+    
+    <p class="mt-3">
+        Pas de compte ? <a href="{% url 'register' %}">S'inscrire</a>
+    </p>
+</div>
+{% endblock %}

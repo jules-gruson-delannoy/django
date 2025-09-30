@@ -1,0 +1,12 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<div class="align-center col-8 offset-2">
+    <p class="lead mb-3 ml-0">Se déconnecter</p>
+    <hr/>
+    <div class="form-group mb-3">
+        <label>Vous avez été déconnecté.</label>
+    </div>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-2">Retour à l'accueil</a>
+</div>
+{% endblock %}

@@ -1,27 +1,27 @@
 {% extends 'monApp/base.html' %}
 
-{% block menu %}
-<h1>Catégories disponibles</h1>
-{% endblock %}
-
 {% block contenu %}
-<ul>
-    {% for cat in ctgrs %}
-        <li>{{ cat.nomCat }}</li>
-    {% empty %}
-        <li>Aucune catégorie disponible.</li>
-    {% endfor %}
-</ul>
-
-<p>
-    J'ai 
-    {% if ctgrs|length < 5 %}
-        peu de 
-    {% elif ctgrs|length < 10 %}
-        quelques 
-    {% else %}
-        beaucoup de 
-    {% endif %}
-    catégories préférées.
-</p>
+<h1>{{ titremenu }}</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Nombre de produits</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for categorie in categories %}
+        <tr>
+            <td><a href="{% url 'dtl_categorie' categorie.idCat %}">{{ categorie.idCat }}</a></td>
+            <td>{{ categorie.nomCat }}</td>
+            <td>{{ categorie.produits.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">Aucune catégorie trouvée</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

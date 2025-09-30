@@ -1,0 +1,22 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<h1>{{ titremenu }}</h1>
+<div class="card">
+    <div class="card-body">
+        <h2>{{ categorie.nomCat }}</h2>
+        <p><strong>ID :</strong> {{ categorie.idCat }}</p>
+        
+        <h4>Produits dans cette catégorie :</h4>
+        <ul>
+            {% for produit in categorie.produits.all %}
+            <li>{{ produit.intituleProd }} - {{ produit.prixUnitaireProd }} €</li>
+            {% empty %}
+            <li>Aucun produit dans cette catégorie</li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'lst_categories' %}" class="btn btn-primary">Retour à la liste des catégories</a>
+    </div>
+</div>
+{% endblock %}
