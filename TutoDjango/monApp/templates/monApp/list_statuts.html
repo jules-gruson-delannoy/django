@@ -1,6 +1,10 @@
 {% extends 'monApp/base.html' %}
-{% block contenu %}
+
+{% block menu %}
 <h1>Statuts disponibles</h1>
+{% endblock %}
+
+{% block contenu %}
 <ul>
     {% for st in stts %}
         <li>{{ st.libelleStatus }}</li>
@@ -8,4 +12,16 @@
         <li>Aucun statut disponible.</li>
     {% endfor %}
 </ul>
+
+<p>
+    J'ai 
+    {% if stts|length < 5 %}
+        peu de 
+    {% elif stts|length < 10 %}
+        quelques 
+    {% else %}
+        beaucoup de 
+    {% endif %}
+    statuts préférés.
+</p>
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends 'monApp/base.html' %}
-{% block contenu %}
+
+{% block menu %}
 <h1>Rayons disponibles</h1>
+{% endblock %}
+
+{% block contenu %}
 <ul>
     {% for rayon in rayons %}
         <li>{{ rayon.nomRayon }}</li>
@@ -8,4 +12,16 @@
         <li>Aucun rayon disponible.</li>
     {% endfor %}
 </ul>
+
+<p>
+    J'ai 
+    {% if rayons|length < 5 %}
+        peu de 
+    {% elif rayons|length < 10 %}
+        quelques 
+    {% else %}
+        beaucoup de 
+    {% endif %}
+    rayons préférés.
+</p>
 {% endblock %}

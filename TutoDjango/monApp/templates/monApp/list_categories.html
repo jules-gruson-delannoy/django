@@ -1,6 +1,10 @@
 {% extends 'monApp/base.html' %}
-{% block contenu %}
+
+{% block menu %}
 <h1>Catégories disponibles</h1>
+{% endblock %}
+
+{% block contenu %}
 <ul>
     {% for cat in ctgrs %}
         <li>{{ cat.nomCat }}</li>
@@ -8,4 +12,16 @@
         <li>Aucune catégorie disponible.</li>
     {% endfor %}
 </ul>
+
+<p>
+    J'ai 
+    {% if ctgrs|length < 5 %}
+        peu de 
+    {% elif ctgrs|length < 10 %}
+        quelques 
+    {% else %}
+        beaucoup de 
+    {% endif %}
+    catégories préférées.
+</p>
 {% endblock %}

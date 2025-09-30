@@ -1,5 +1,21 @@
 {% extends 'monApp/base.html' %}
-{% block contenu %}
+
+{% block menu %}
 <h1>Qui sommes-nous ?</h1>
+{% endblock %}
+
+{% block contenu %}
 <p>Nous sommes les goats et oui</p>
+
+<p>
+    Nous avons 
+    {% if 1 < 5 %}
+        peu de 
+    {% elif 1 < 10 %}
+        quelques 
+    {% else %}
+        beaucoup de 
+    {% endif %}
+    informations à partager.
+</p>
 {% endblock %}

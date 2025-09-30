@@ -1,5 +1,21 @@
 {% extends 'monApp/base.html' %}
-{% block contenu %}
+
+{% block menu %}
 <h1>Nos contacts</h1>
+{% endblock %}
+
+{% block contenu %}
 <p>Insta en vrai</p>
+
+<p>
+    Nous avons 
+    {% if 1 < 5 %}
+        peu de 
+    {% elif 1 < 10 %}
+        quelques 
+    {% else %}
+        beaucoup de 
+    {% endif %}
+    moyens de contact.
+</p>
 {% endblock %}
