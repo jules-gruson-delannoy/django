@@ -6,31 +6,27 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Inscription</h2>
+                    <h2 class="card-title text-center mb-4">Connexion</h2>
                     
                     {% if error %}
                     <div class="alert alert-danger">{{ error }}</div>
                     {% endif %}
                     
-                    <form method="POST" action="{% url 'register' %}">
+                    <form method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="username" class="form-label">Nom d'utilisateur</label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="mb-3">
-                            <label for="mail" class="form-label">Adresse email</label>
-                            <input type="email" class="form-control" id="mail" name="mail" required>
-                        </div>
-                        <div class="mb-3">
                             <label for="password" class="form-label">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-success w-100">S'inscrire</button>
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
                     </form>
                     
                     <div class="text-center mt-3">
-                        <p>Déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
+                        <p>Pas de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>
                     </div>
                 </div>
             </div>

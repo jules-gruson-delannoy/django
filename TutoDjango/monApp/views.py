@@ -107,43 +107,62 @@ class RayonDetailView(DetailView):
 class ConnectView(LoginView):
     template_name = 'monApp/page_login.html'
     
-    def get_success_url(self):
-        """Rediriger vers la page d'accueil après connexion"""
-        return '/home/'
-    
-    # Tu peux aussi override post() si tu veux garder ta logique personnalisée
     def post(self, request, *args, **kwargs):
-        lgn = request.POST.get('username', '')
-        pswrd = request.POST.get('password', '')
-        user = authenticate(username=lgn, password=pswrd)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
         
-        if user is not None and user.is_active:
+        if user is not None:
             login(request, user)
-            return redirect('home')  # Redirige vers la page d'accueil
+            return redirect('home')
         else:
-            # Si l'authentification échoue, reste sur la page de login avec erreur
             return render(request, self.template_name, {
                 'error': 'Identifiant ou mot de passe incorrect'
             })
 
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
 class RegisterView(TemplateView):
     template_name = 'monApp/page_register.html'
     
-    def post(self, request, **kwargs):
-        username = request.POST.get('username', False)
-        mail = request.POST.get('mail', False)
-        password = request.POST.get('password', False)
-        user = User.objects.create_user(username, mail, password)
-        user.save()
-        if user is not None and user.is_active:
-            return render(request, 'monApp/page_login.html')
-        else:
-            return render(request, 'monApp/page_register.html')
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        mail = request.POST.get('mail')
+        password = request.POST.get('password')
+        
+        # Vérifier si l'utilisateur existe déjà
+        if User.objects.filter(username=username).exists():
+            return render(request, self.template_name, {
+                'error': 'Cet utilisateur existe déjà'
+            })
+        
+        # Créer l'utilisateur
+        try:
+            user = User.objects.create_user(
+                username=username, 
+                email=mail, 
+                password=password
+            )
+            user.save()
+            
+            # Connecter automatiquement l'utilisateur après inscription
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return redirect('login')
+                
+        except Exception as e:
+            return render(request, self.template_name, {
+                'error': f'Erreur lors de la création: {str(e)}'
+            })
 
 class DisconnectView(TemplateView):
     template_name = 'monApp/page_logout.html'
     
-    def get(self, request, **kwargs):
+    def get(self, request, *args, **kwargs):
         logout(request)
         return render(request, self.template_name)
 
