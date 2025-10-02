@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from .models import Produit, Categorie, Statut, Rayon
+from django.http import HttpResponse
+from .models import Produit, Categorie, Statut, Rayon, ProduitForm
 from .forms import ContactUsForm
 
 # Vues génériques de base
@@ -256,3 +257,23 @@ class ContactView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['titreh1'] = "Contact us!"
         return context
+    
+# Create Views
+
+class ProduitCreateView(CreateView):
+    model = Produit
+    form_class=ProduitForm
+    template_name = "monApp/create_produit.html"
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        prdt = form.save()
+        return redirect('dtl-prdt', prdt.refProd)
+    
+class ProduitUpdateView(UpdateView):
+    model = Produit
+    form_class=ProduitForm
+    template_name = "monApp/update_produit.html"
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        prdt = form.save()
+        return redirect('dtl-prdt', prdt.refProd)

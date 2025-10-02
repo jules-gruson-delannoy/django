@@ -12,3 +12,6 @@ TP 2 fini enfaite
 
 30/09
 TP 3 page 3
+
+02/10
+TP3 page 7

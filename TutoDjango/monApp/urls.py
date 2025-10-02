@@ -31,4 +31,7 @@ urlpatterns = [
     # Formulaire contact
     path("contact/", views.ContactView.as_view(), name="contact"),
     path("email-sent/", views.EmailConfirmationView, name="email_sent"),
+
+    # Création et modification de produit
+    path("produit/",views.ProduitCreateView.as_view(), name="crt-prdt"),
 ]

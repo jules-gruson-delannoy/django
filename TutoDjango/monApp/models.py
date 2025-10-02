@@ -40,3 +40,9 @@ class Contenir(models.Model):
 
     def __str__(self):
         return f"{self.rayons} : {self.produits}"
+
+class ProduitForm(forms.ModelForm):
+    class Meta:
+        model = Produit
+        #fields = '__all__'
+        exclude = ('categorie', 'statut')
